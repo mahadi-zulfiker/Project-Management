@@ -15,7 +15,7 @@ const Sidebar = () => {
                 {/* TOP LOGO */}
                 <div className='z-50 flex min-h-[56px] w-64 items-center justify-between bg-white px-6 pt-3 dark:bg-black'>
                     <div className='text-xl font-bold text-gray-800 dark:text-white'>
-                       EDLIST 
+                       ED LIST
                     </div>
                 </div>
                 {/* Team */}
@@ -23,7 +23,7 @@ const Sidebar = () => {
                     <Image src="/logo.png" alt="logo" width={40} height={40}/>
                     <div>
                         <h3 className='text-md font-bold tracking-wide dark:text-gray-200'>
-                            EDROH Team
+                            Mahadi Team
                         </h3>
                         <div className='mt-1 flex items-start gap-2'>
                             <LockIcon className='mt-1 flex items-start gap-2'/>
