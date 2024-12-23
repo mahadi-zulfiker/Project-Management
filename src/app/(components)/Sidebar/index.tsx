@@ -1,7 +1,7 @@
 "use client";
 import { useAppDispatch, useAppSelector } from '@/app/redux';
 import { setIsSidebarCollapsed } from '@/state';
-import { Briefcase, Home, LockIcon, LucideIcon, Search, Settings, User, Users, X } from 'lucide-react';
+import { AlertCircle, AlertOctagon, AlertTriangle, Briefcase, ChevronDown, ChevronUp, Home, Layers3, LockIcon, LucideIcon, Search, Settings, ShieldAlert, User, Users, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -54,6 +54,62 @@ const Sidebar = () => {
                     <SidebarLink icon={User} label="Users" href="/users" />
                     <SidebarLink icon={Users} label="Teams" href="/teams" />
                 </nav>
+
+                {/* Projects Links*/}
+                <button onClick={() => setShowProjects((prev) => !prev)} className='flex w-full items-center justify-between px-8 py-3 gap-3 cursor-pointer text-gray-500'>
+                    <span className=''>Projects</span>
+                    {showProjects ? (
+                        <ChevronUp className='h-5 w-5' />
+                    ) : (
+                        <ChevronDown className='h-5 w-5' />
+                    )}
+                </button>
+                {/* Projects Lists*/}
+                {/* {showProjects &&
+                    projects?.map((project) => (
+                        <SidebarLink
+                            key={project.id}
+                            icon={Briefcase}
+                            label={project.name}
+                            href={`/projects/${project.id}`}
+                        />
+                    ))} */}
+
+                {/* Priority Links*/}
+                <button onClick={() => setShowPriority((prev) => !prev)} className='flex w-full items-center justify-between px-8 py-3 gap-3 cursor-pointer text-gray-500'>
+                    <span className=''>Priority</span>
+                    {showPriority ? (
+                        <ChevronUp className='h-5 w-5' />
+                    ) : (
+                        <ChevronDown className='h-5 w-5' />
+                    )}
+                </button>
+                {/* Priority Lists*/}
+                {showPriority && (
+                    <>
+                        <SidebarLink
+                            icon={AlertCircle}
+                            label="Urgent"
+                            href="/priority/urgent"
+                        />
+                        <SidebarLink
+                            icon={ShieldAlert}
+                            label="High"
+                            href="/priority/high"
+                        />
+                        <SidebarLink
+                            icon={AlertTriangle}
+                            label="Medium"
+                            href="/priority/medium"
+                        />
+                        <SidebarLink icon={AlertOctagon} label="Low" href="/priority/low" />
+                        <SidebarLink
+                            icon={Layers3}
+                            label="Backlog"
+                            href="/priority/backlog"
+                        />
+                    </>
+                )}
             </div>
         </div>
     )
@@ -72,10 +128,6 @@ const SidebarLink = ({
 }: SidebarLinkProps) => {
     const pathname = usePathname();
     const isActive = pathname === href || (pathname === '/' && href === '/dashboard');
-    const screenWidth = window.innerWidth;
-
-    const dispatch = useAppDispatch();
-    const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollapsed);
 
     return (
         <Link href={href} className="w-full">
